@@ -9,3 +9,27 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:${server.instance.port}/eureka
+
+#Some customization to the routes. In the following example, it will not add route for any service except /myhello/** since we have
+#mentioned ignoredServices as '*'. You also wont get the mapped URL in the console logs while starting this application.
+# Note : We can also set ignoredServices as hello-service. In this case, it wont add route /hello-service. But other services
+# routes will add like /bye-service
+#zuul:
+#  ignoredServices: '*'
+#  routes:
+#    helloService:
+#      path: /myhello/**
+#      serviceId: hello-service
+
+# Zuul without service discovery. Also we need to comment following in this project pom dependency.
+#<!--<dependency>-->
+#			<!--<groupId>org.springframework.cloud</groupId>-->
+#			<!--<artifactId>spring-cloud-starter-eureka</artifactId>-->
+#		<!--</dependency>-->
+#
+# Also, run the bye service with out using service discovery.
+#zuul:
+#  routes:
+#    byeService :
+#      path: /mybye/**
+#      url: http://localhost:8006
